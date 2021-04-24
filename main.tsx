@@ -62,6 +62,11 @@ router.get("/screenshot.png", async (ctx) => {
     ctx.response.status = 400;
     return;
   }
+  if (url.host == "screenshot.deno.dev") {
+    ctx.response.body = "Nope!";
+    ctx.response.status = 400;
+    return;
+  }
 
   const browser = await puppeteer.connect({
     browserWSEndpoint: `wss://chrome.browserless.io?token=${BROWSERLESS_TOKEN}`,
